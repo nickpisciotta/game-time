@@ -1,8 +1,10 @@
 var assert = require('chai').assert;
 var Block = require("../lib/block.js");
 
-describe ("Initializes to default value", function() {
-  it ("should have default x and y", function () {
+var canvas = {width: 300, height: 300};
+
+describe ("Block", function() {
+  it ("should have default x and y values", function () {
     var block = new Block();
     assert.equal(block.x, 50);
     assert.equal(block.y, 290);
@@ -10,8 +12,8 @@ describe ("Initializes to default value", function() {
 
   it ("should have a default width and height", function() {
     var block = new Block();
-    assert.equal(block.width, 100);
-    assert.equal(block.height, 100);
+    assert.equal(block.width, 30);
+    assert.equal(block.height, 10);
   });
 
   it ("should change x and y values with params", function(){
@@ -29,25 +31,50 @@ describe ("Initializes to default value", function() {
   it ("should change block x value if it moves to the left", function(){
     var block = new Block();
     block.moveLeft();
-    assert.equal(block.x, 49);
+    assert.equal(block.x, 40);
   });
 
   it ("should change block x value if it moves to the right", function(){
-    var block = new Block();
+    var block = new Block({canvas: canvas});
     block.moveRight();
-    assert.equal(block.x, 51);
+    assert.equal(block.x, 60);
   });
 
   it ("should change block y value if it moves up", function(){
     var block = new Block();
     block.moveUp();
-    assert.equal(block.y, 289);
+    assert.equal(block.y, 280);
   });
 
   it ("should change block y value if it moves down", function(){
-    var block = new Block({y: 200});
+    var block = new Block({canvas: canvas, y: 200});
     block.moveDown();
-    assert.equal(block.y, 201);
+    assert.equal(block.y, 210);
   });
+
+  it ("should not move left if x is 1", function() {
+    var block = new Block({x: 1});
+    block.moveLeft();
+    assert.equal(block.x, 1);
+  });
+
+  it ("should not move right of canvas", function() {
+    var block = new Block({x: 290, canvas: canvas});
+    block.moveRight();
+    assert.equal(block.x, 290);
+  });
+
+  it ("should not move below canvas", function() {
+    var block = new Block({y: 290, canvas: canvas});
+    block.moveDown();
+    assert.equal(block.y, 290);
+  });
+
+  it ("should not move above canvas", function() {
+    var block = new Block({y: 1});
+    block.moveUp();
+    assert.equal(block.y, 1);
+  });
+
 
 });
