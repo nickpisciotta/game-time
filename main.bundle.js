@@ -42,15 +42,86 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Block = __webpack_require__(1);
+	var canvas = document.getElementById('canvas');
+	var context = canvas.getContext("2d");
+
+	var firstBlock = new Block({ canvas: canvas, context: context });
+
+	requestAnimationFrame(function gameLoop() {
+	  context.clearRect(0, 0, canvas.width, canvas.height);
+	  firstBlock.draw();
+
+	  requestAnimationFrame(gameLoop);
+	});
+
+	// Need to change from document to canvas once we figure it out
+	document.addEventListener("keydown", function (e) {
+	  if (e.keyCode === 38) {
+	    firstBlock.moveUp();
+	  } else if (e.keyCode === 40) {
+	    firstBlock.moveDown();
+	  } else if (e.keyCode === 39) {
+	    firstBlock.moveRight();
+	  } else if (e.keyCode === 37) {
+	    firstBlock.moveLeft();
+	  }
+	});
+
+/***/ },
+/* 1 */
 /***/ function(module, exports) {
 
-	'use strict';
+	function Block(options) {
+	  this.options = options || {};
+	  this.canvas = this.options.canvas;
+	  this.context = this.options.context;
+	  this.x = this.options.x || 50;
+	  this.y = this.options.y || 290;
+	  this.width = this.options.width || 50;
+	  this.height = this.options.height || 100;
+	}
 
-	var sayHello = function sayHello() {
-	  return console.log('Hello');
+	Block.prototype.draw = function () {
+	  this.context.fillRect(this.x, this.y, this.width, this.height);
 	};
 
-	sayHello();
+	// requestAnimationFrame(function Block.prototype.moveLeft(){
+	//   this.context.clearRect(0, 0, canvas.width, canvas.height);
+	//   this.context.fillRect(this.x--, this.y, this.width, this.height);
+	//   return this;
+	//   requestAnimationFrame(Block.prototype.moveLeft())
+	// })
+	// };
+	// Block.prototype.moveLeft = function() {
+
+	Block.prototype.moveRight = function () {
+	  this.x++;
+	  return this;
+	};
+	//create a different draw method that clears it. Every time call draw, clear canvas; will only want to happen in the game
+	//every time requestAnimationFrame starts, clearing and drawing
+	//in requestAnimationFrame, only trigger gamestart and movement
+	Block.prototype.moveUp = function () {
+	  this.y = this.y - 10;
+	  this.context.fillStyle = "pink";
+	  return this;
+	};
+
+	Block.prototype.moveLeft = function () {
+	  this.x--;
+	  return this;
+	};
+
+	Block.prototype.moveDown = function () {
+	  // this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+	  this.y++;
+	  return this;
+	};
+
+	module.exports = Block;
 
 /***/ }
 /******/ ]);

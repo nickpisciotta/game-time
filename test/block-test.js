@@ -10,8 +10,8 @@ describe ("Initializes to default value", function() {
 
   it ("should have a default width and height", function() {
     var block = new Block();
-    assert.equal(block.width, 100);
-    assert.equal(block.height, 100);
+    assert.equal(block.width, 50);
+    assert.equal(block.height, 10);
   });
 
   it ("should change x and y values with params", function(){
@@ -29,25 +29,25 @@ describe ("Initializes to default value", function() {
   it ("should change block x value if it moves to the left", function(){
     var block = new Block();
     block.moveLeft();
-    assert.equal(block.x, 49);
+    assert.equal(block.x, 40);
   });
 
   it ("should change block x value if it moves to the right", function(){
     var block = new Block();
     block.moveRight();
-    assert.equal(block.x, 51);
+    assert.equal(block.x, 60);
   });
 
   it ("should change block y value if it moves up", function(){
     var block = new Block();
     block.moveUp();
-    assert.equal(block.y, 289);
+    assert.equal(block.y, 280);
   });
 
   it ("should change block y value if it moves down", function(){
     var block = new Block({y: 200});
     block.moveDown();
-    assert.equal(block.y, 201);
+    assert.equal(block.y, 210);
   });
 
 });
