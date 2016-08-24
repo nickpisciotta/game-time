@@ -1,2 +1,2 @@
-require("./block-test")
+require("./player-test")
 require("./obstacle-test")
