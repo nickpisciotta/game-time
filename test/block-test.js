@@ -6,8 +6,8 @@ var canvas = {width: 300, height: 300};
 describe ("Block", function() {
   it ("should have default x and y values", function () {
     var block = new Block();
-    assert.equal(block.x, 50);
-    assert.equal(block.y, 290);
+    assert.equal(block.x, 225);
+    assert.equal(block.y, 430);
   });
 
   it ("should have a default width and height", function() {
@@ -31,19 +31,19 @@ describe ("Block", function() {
   it ("should change block x value if it moves to the left", function(){
     var block = new Block();
     block.moveLeft();
-    assert.equal(block.x, 40);
+    assert.equal(block.x, 215);
   });
 
   it ("should change block x value if it moves to the right", function(){
     var block = new Block({canvas: canvas});
     block.moveRight();
-    assert.equal(block.x, 60);
+    assert.equal(block.x, 235);
   });
 
   it ("should change block y value if it moves up", function(){
     var block = new Block();
     block.moveUp();
-    assert.equal(block.y, 280);
+    assert.equal(block.y, 420);
   });
 
   it ("should change block y value if it moves down", function(){
