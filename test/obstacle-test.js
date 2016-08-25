@@ -21,3 +21,6 @@ describe ("Obstacle", function() {
     assert.isAbove(obstacle.x, x);
   });
 });
+//before function in chai document.addElement -- canvas object in document. Still only works in browser, but works in browser.
+//have a block class that then player, obstacle, and platform inherit from; where logic of collisions would live.
+//Gameloop definition should be short--refactor into smaller functions.
