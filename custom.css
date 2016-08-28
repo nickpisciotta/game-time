@@ -15,8 +15,7 @@ body {
 }
 
 #canvas {
-  /*background-color: green;*/
-  background:url(assets/background.jpg);
+  background:url(assets/gameboard.jpg);
  }
 
 .title {
