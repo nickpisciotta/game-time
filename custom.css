@@ -16,6 +16,7 @@ body {
 
 #canvas {
   background:url(assets/gameboard.jpg);
+  border:8px solid #000000;
  }
 
 .title {
