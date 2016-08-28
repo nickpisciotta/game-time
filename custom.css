@@ -1,4 +1,26 @@
+@font-face {
+font-family: "Manhattan Darling";
+src: url(assets/ManhattanDarling-Regular.otf);
+}
+
+@font-face {
+  font-family: "Noto Sans";
+  src: url(http://fonts.googleapis.com/css?family=Noto+Sans);
+}
+
+body {
+  background-color: pink;
+  text-align: center;
+  font-family: "Noto Sans";
+}
+
 #canvas {
-  /*background-color: green;*/
-  background:url(assets/background.jpg);
+  background:url(assets/gameboard.jpg);
+  border:8px solid #000000;
  }
+
+.title {
+  font-size: 125px;
+  text-align: center;
+  font-family: "Manhattan Darling";
+}
