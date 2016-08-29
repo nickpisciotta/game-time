@@ -5,7 +5,7 @@ src: url(assets/ManhattanDarling-Regular.otf);
 
 @font-face {
   font-family: "Noto Sans";
-  src: url(http://fonts.googleapis.com/css?family=Noto+Sans);
+  src: url(assets/NotoSans-Regular.ttf);
 }
 
 body {
@@ -23,4 +23,32 @@ body {
   font-size: 125px;
   text-align: center;
   font-family: "Manhattan Darling";
+}
+
+.start-menu-item {
+  font-family: "Noto Sans";
+}
+
+.start-button {
+  padding: 10px 10px;
+font-size: 16px;
+color: white;
+line-height: normal;
+-webkit-border-radius: 8px;
+-moz-border-radius: 8px;
+     border-radius: 8px;
+ background: black;
+ border: 2px solid white;
+}
+
+.start-button:hover {
+    padding: 10px 10px;
+  font-size: 16px;
+  color: black;
+  line-height: normal;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+       border-radius: 8px;
+   background: white;
+   border: 2px solid black;
 }
