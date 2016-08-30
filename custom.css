@@ -17,6 +17,7 @@ body {
 #canvas {
   background:url(assets/gameboard.jpg);
   border:8px solid #000000;
+  margin-left: -15%;
  }
 
 #game-board {
@@ -43,6 +44,18 @@ line-height: normal;
      border-radius: 8px;
  background: black;
  border: 2px solid white;
+}
+
+.score {
+  display: inline-block;
+  float:left;
+  font-family: "Manhattan Darling";
+  font-size: 60px;
+  margin-left: 8%;
+}
+
+.score-counter {
+  font-family: "Noto Sans";
 }
 
 .start-button:hover {
