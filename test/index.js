@@ -1,3 +1,3 @@
-require("./player-test")
-require("./obstacle-test")
-require("./game-test")
+require("./player-test");
+require("./obstacle-test");
+require("./game-test");
