@@ -60,7 +60,6 @@
 	  requestAnimationFrame(gameLoop);
 	});
 
-	// Need to change from document to canvas once we figure it out
 	document.addEventListener("keydown", function (e) {
 	  if (e.keyCode === 38) {
 	    player.moveUp();
@@ -75,9 +74,9 @@
 
 /***/ },
 /* 1 */
-/***/ function(module, exports) {
+/***/ function(module) {
 
-	
+
 	function Player(options) {
 	  this.options = options || {};
 	  this.canvas = this.options.canvas;
