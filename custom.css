@@ -58,6 +58,18 @@ line-height: normal;
   font-family: "Noto Sans";
 }
 
+.level {
+  display: inline-block;
+  float:left;
+  font-family: "Manhattan Darling";
+  font-size: 60px;
+  margin-left: 8%;
+}
+
+.level-counter {
+  font-family: "Noto Sans";
+}
+
 .start-button:hover {
     padding: 10px 10px;
   font-size: 16px;
