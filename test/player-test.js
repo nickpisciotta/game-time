@@ -12,8 +12,8 @@ describe ("Player", function() {
 
   it ("should have a default width and height", function() {
     var player = new Player();
-    assert.equal(player.width, 30);
-    assert.equal(player.height, 10);
+    assert.equal(player.width, 20);
+    assert.equal(player.height, 42);
   });
 
   it ("should change x and y values with params", function(){
