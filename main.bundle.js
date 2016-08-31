@@ -11940,17 +11940,17 @@
 	var xValues = _.range(0, -500, -30);
 	var xValuesLeft = _.range(450, 1000, 30);
 	var carrot = new Image();
-	carrot.src = '/assets/carrot.png';
+	carrot.src = 'assets/carrot.png';
 	var broccoli = new Image();
-	broccoli.src = '/assets/broccoli.png';
+	broccoli.src = 'assets/broccoli.png';
 	var asparagus = new Image();
-	asparagus.src = '/assets/asparagus.png';
+	asparagus.src = 'assets/asparagus.png';
 	var cauliflower = new Image();
-	cauliflower.src = '/assets/cauliflower.png';
+	cauliflower.src = 'assets/cauliflower.png';
 	var eggplant = new Image();
-	eggplant.src = '/assets/aubergine.png';
+	eggplant.src = 'assets/aubergine.png';
 	var pepper = new Image();
-	pepper.src = '/assets/pepper.png';
+	pepper.src = 'assets/pepper.png';
 	var images = [broccoli, carrot, cauliflower, asparagus, eggplant, pepper];
 
 	function Obstacle(options) {
