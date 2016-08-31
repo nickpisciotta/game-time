@@ -4,13 +4,18 @@
   <link rel="stylesheet" type="text/css" href="custom.css">
   <meta charset="utf-8">
   <title>Cake Walk</title>
+  <style media="document">
+.sqs-audio-embed {
+  visibility: hidden;
+}
+</style>
 </head>
 <body>
   <div class="title">Cake Walk</div>
   <div class="start-menu" id="start-menu">
     <p>
       <div class="start-menu-item">
-        <img src="assets/boy.png" alt="Billy" height="250"/>
+        <img src="./assets/boy.png" alt="Billy" height="250"/>
       </div>
     </p>
       <p>
@@ -28,6 +33,7 @@
         </p>
     </div>
   <div id="game-board">
+    <embed src="./assets/8 Bit Love!.mp3" autostart="true" loop="true" hidden="true"></embed>
     <div class="score">Score<br><span id="score-counter" class="score-counter"></span></div>
     <div class="level">Level<br><span id="level-counter" class="level-counter"></span></div>
   <canvas id="canvas" width="450" height="450">
