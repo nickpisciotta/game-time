@@ -81,3 +81,12 @@ line-height: normal;
    background: white;
    border: 2px solid black;
 }
+
+.game-over {
+  display: none;
+}
+
+body, html {
+   overflow-x: hidden;
+   overflow-y: auto;
+}
