@@ -30,7 +30,7 @@ describe ("Game", function() {
   });
 
   it("should change state and lives total when game is deactivated", function() {
-    game1 = new Game();
+    var game1 = new Game();
 
     assert.equal(game1.lives, 3);
     assert.equal(game1.state, "active");
@@ -42,7 +42,7 @@ describe ("Game", function() {
   });
 
   it("should change state and player coordinates when game is activated", function(){
-    game2 = new Game();
+    var game2 = new Game();
 
     assert.equal(game2.state, "active");
     game2.deactivateGame();
@@ -52,10 +52,10 @@ describe ("Game", function() {
     assert.equal(game2.state, "active");
     assert.equal(game2.player.x, 225);
     assert.equal(game2.player.y, 430);
-  })
+  });
 
   it ("should reset lives and level when level ends", function() {
-    game3 = new Game();
+    var game3 = new Game();
     game3.level = 2;
     game3.lives = 0;
     game3.restartLevel();
@@ -65,56 +65,56 @@ describe ("Game", function() {
   });
 
   it ("should change game state if player has a y value of 10", function() {
-    game4 = new Game();
+    var game4 = new Game();
     game4.player.y = 10;
 
     game4.checkLevel();
 
-    assert.equal(game4.state, "changeLevel")
+    assert.equal(game4.state, "changeLevel");
   });
 
   it ("should do increase to level 2 if the score is >= 400", function() {
-    game5 = new Game();
+    var game5 = new Game();
     game5.player.score = 400;
 
     game5.advanceLevel();
 
-    assert.equal(game5.level, 2)
+    assert.equal(game5.level, 2);
   });
 
   it ("should decrease life by 1 if colision between player and object", function() {
-    game6 = new Game();
-    player = game6.player
+    var game6 = new Game();
+    var player = game6.player;
     player.x = 20;
     player.y = 40;
-    obstacle = new Upperobstacle();
+    var obstacle = new Upperobstacle();
     obstacle.x = 25;
     obstacle.y = 45;
     obstacle.width = 10;
-    obstacle.height = 10
-    game6.upperObstacles = [obstacle]
+    obstacle.height = 10;
+    game6.upperObstacles = [obstacle];
 
     game6.checkForCollision(player);
 
-    assert.equal(game6.lives, 2)
-    assert.equal(game6.state, "deactive")
+    assert.equal(game6.lives, 2);
+    assert.equal(game6.state, "deactive");
   });
 
   it ("should not decrease life by 1 if there is no colision between player and object", function() {
-    game7 = new Game();
-    player = game7.player
+    var game7 = new Game();
+    var player = game7.player;
     player.x = 20;
     player.y = 40;
-    obstacle = new Upperobstacle();
+    var obstacle = new Upperobstacle();
     obstacle.x = 200;
     obstacle.y = 400;
     obstacle.width = 10;
-    obstacle.height = 10
-    game7.upperObstacles = [obstacle]
+    obstacle.height = 10;
+    game7.upperObstacles = [obstacle];
 
     game7.checkForCollision(player);
 
-    assert.equal(game7.lives, 3)
-    assert.equal(game7.state, "active")
+    assert.equal(game7.lives, 3);
+    assert.equal(game7.state, "active");
   });
-})
+});

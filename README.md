@@ -10,7 +10,7 @@ As a player advances levels, the obstacles and platforms (both vegetables and ju
 
 ## Creators
 
-This game was the creation of [Nick Pisciotta](github.com/nickpisciotta) and [Marcella Wigg](github.com/marcellawigg) as a pair project.
+This game was the creation of [Nick Pisciotta](http://github.com/nickpisciotta) and [Marcella Wigg](http://github.com/marcellawigg) as a pair project.
 
 ---
 
@@ -20,7 +20,6 @@ This game was the creation of [Nick Pisciotta](github.com/nickpisciotta) and [Ma
 ---
 
 ## Play Live
-
 
 [Play CakeWalk!](nickpisciotta.github.io/game-time)
 
