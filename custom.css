@@ -64,15 +64,26 @@ line-height: normal;
   font-family: "Manhattan Darling";
   font-size: 60px;
   margin-left: 8%;
+
 }
 
 .score-counter {
   font-family: "Noto Sans";
+  margin-bottom: 2%;
 }
 
 .level {
   display: inline-block;
   float:left;
+  clear: left;
+  font-family: "Manhattan Darling";
+  font-size: 60px;
+  margin-left: 8%;
+}
+.lives {
+  display: inline-block;
+  float:left;
+  clear: left;
   font-family: "Manhattan Darling";
   font-size: 60px;
   margin-left: 8%;
@@ -80,6 +91,12 @@ line-height: normal;
 
 .level-counter {
   font-family: "Noto Sans";
+  margin-bottom: 2%;
+}
+
+.lives-counter {
+  font-family: "Noto Sans";
+  margin-bottom: 2%;
 }
 
 .start-button:hover {
@@ -108,9 +125,4 @@ line-height: normal;
 
 .game-over {
   display: none;
-}
-
-body, html {
-   overflow-x: hidden;
-   overflow-y: auto;
 }
