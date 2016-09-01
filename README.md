@@ -15,7 +15,7 @@ This game was the creation of [Nick Pisciotta](github.com/nickpisciotta) and [Ma
 ---
 
 ## See It In Action!
-[!(http://recordit.co/Tv8GSln7ru)]
+![](http://recordit.co/Tv8GSln7ru)
 
 ---
 
