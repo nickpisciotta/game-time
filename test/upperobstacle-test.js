@@ -20,4 +20,12 @@ describe ("Upperobstacle", function() {
 
     assert.isAbove(obstacle.x, x);
   });
+
+  it ("should decrease x value when moving left", function() {
+    var obstacle = new Upperobstacle(options);
+    var x = obstacle.x;
+    obstacle.movingLeft();
+
+    assert.isBelow(obstacle.x, x);
+  });
 });
