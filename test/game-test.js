@@ -1,6 +1,7 @@
 var assert = require("chai").assert;
 var Game = require("../lib/game.js")
 var Obstacle = require("../lib/obstacle.js")
+var Upperobstacle = require("../lib/upper-obstacle")
 
 var game = new Game();
 
@@ -86,12 +87,12 @@ describe ("Game", function() {
     player = game6.player
     player.x = 20;
     player.y = 40;
-    obstacle = new Obstacle();
+    obstacle = new Upperobstacle();
     obstacle.x = 25;
     obstacle.y = 45;
     obstacle.width = 10;
     obstacle.height = 10
-    game6.obstacles = [obstacle]
+    game6.upperObstacles = [obstacle]
 
     game6.checkForCollision(player);
 
@@ -104,12 +105,12 @@ describe ("Game", function() {
     player = game7.player
     player.x = 20;
     player.y = 40;
-    obstacle = new Obstacle();
+    obstacle = new Upperobstacle();
     obstacle.x = 200;
     obstacle.y = 400;
     obstacle.width = 10;
     obstacle.height = 10
-    game7.obstacles = [obstacle]
+    game7.upperObstacles = [obstacle]
 
     game7.checkForCollision(player);
 
