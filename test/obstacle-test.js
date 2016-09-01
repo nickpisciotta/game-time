@@ -2,7 +2,7 @@ var assert = require('chai').assert;
 var Obstacle = require("../lib/obstacle.js");
 
 var canvas = {width: 300, height: 300};
-var options = {canvas: canvas, x: 100, y: 100, width: 300, height: 300, context: "context" }
+var options = {canvas: canvas, x: 100, y: 100, width: 300, height: 300, context: "context" };
 
 describe ("Obstacle", function() {
   it ("should create obstacle given params", function() {
