@@ -59,23 +59,7 @@
 
 	requestAnimationFrame(function gameLoop() {
 	  context.clearRect(0, 0, canvas.width, canvas.height);
-	  if (game.state === "active") {
-	    game.initiateElements();
-	  } else if (game.state === "changeLevel") {
-	    levelUpMessage();
-	    game.advanceLevel();
-	    setTimeout(function () {
-	      game.nextGameLevel();
-	    }, 1000);
-	  } else if (game.state === "disabled") {
-	    $("#game-board").hide();
-	    $(".game-over").show();
-	  } else {
-	    gameOverMessage();
-	    setTimeout(function () {
-	      game.restartGame();
-	    }, 1000);
-	  }
+	  checkGameStatus();
 	  requestAnimationFrame(gameLoop);
 	});
 
@@ -99,13 +83,45 @@
 	function gameOverMessage() {
 	  context.font = "bold 40pt arial";
 	  context.fillStyle = "#FFFFFF";
-	  context.fillText("Yuck, vegetables", 20, 140);
+	  if (game.player.y > 180) {
+	    context.fillText("Yuck, vegetables", 20, 140);
+	  } else if (game.player.y < 160 && game.player.y > 10) {
+	    context.fillText("I hate gym!", 100, 140);
+	  }
 	}
 
 	function levelUpMessage() {
 	  context.font = "bold 40pt arial";
 	  context.fillStyle = "#FFFFFF";
 	  context.fillText("Levelin' Up!", 20, 140);
+	}
+
+	function levelUp() {
+	  levelUpMessage();
+	  game.advanceLevel();
+	  setTimeout(function () {
+	    game.nextGameLevel();
+	  }, 1000);
+	}
+
+	function checkGameStatus() {
+	  switch (game.state) {
+	    case "active":
+	      game.initiateElements();
+	      break;
+	    case "changeLevel":
+	      levelUp();
+	      break;
+	    case "disabled":
+	      $("#game-board").hide();
+	      $(".game-over").show();
+	      break;
+	    default:
+	      gameOverMessage();
+	      setTimeout(function () {
+	        game.restartGame();
+	      }, 1000);
+	  }
 	}
 
 /***/ },
@@ -10196,12 +10212,16 @@
 	var $ = __webpack_require__(1);
 	var Player = __webpack_require__(4);
 	var Obstacle = __webpack_require__(5);
+	var Upperobstacle = __webpack_require__(6);
 	var allObstacles = [];
+	var allUpperObstacles = [];
 	var xValues = _.range(0, -500, -30);
 	var yValues = [210, 240, 270, 300, 330, 360, 390];
+	var upperYValues = [45, 75, 105, 145];
+	var upperLeftValues = [45, 105];
 	var leftValues = [240, 300, 360];
-	var ew = new Audio('./assets/ew.mp3');
-	var fanfare = new Audio('./assets/fanfare.mp3');
+	var ew = new Audio('assets/ew.mp3');
+	var yay = new Audio('assets/yay.mp3');
 
 	function Game(canvas, context) {
 	  this.lives = 3;
@@ -10211,14 +10231,23 @@
 	  this.context = context;
 	  this.player = new Player({ canvas: canvas, context: context });
 	  this.obstacles = makeObstacle(canvas, context);
+	  this.upperObstacles = makeUpperObstacle(canvas, context);
 	  this.level = 1;
 	  localStorage.setItem("gamelives", JSON.stringify(this.lives));
 	  localStorage.setItem("playerscore", JSON.stringify(this.player.score));
 	}
 
 	Game.prototype.checkForCollision = function (player) {
+	  if (this.player.y > 180) {
+	    this.checkObstacles(player, this.obstacles);
+	  } else if (this.player.y < 160 && this.player.y > 10) {
+	    this.checkObstacles(player, this.upperObstacles);
+	  }
+	};
+
+	Game.prototype.checkObstacles = function (player, obstacleArray) {
 	  var self = this;
-	  this.obstacles.forEach(function (obstacle) {
+	  obstacleArray.forEach(function (obstacle) {
 	    if (player.x < obstacle.x + obstacle.width && player.x + player.width > obstacle.x && player.y < obstacle.y + obstacle.height && player.height + player.y > obstacle.y) {
 	      self.deactivateGame();
 	    }
@@ -10235,12 +10264,10 @@
 	    this.lives -= 1;
 	    localStorage.gamelives -= 1;
 	    this.state = "disabled";
-	  };
+	  }
 	};
 
-	Game.prototype.initiateElements = function () {
-	  $(".level-counter").html(this.level);
-	  this.player.draw();
+	Game.prototype.moveObstacles = function () {
 	  this.obstacles.forEach(function (obstacle) {
 	    if (_.contains(leftValues, obstacle.y)) {
 	      obstacle.movingLeft().draw();
@@ -10248,13 +10275,25 @@
 	      obstacle.movingRight().draw();
 	    }
 	  });
+	  this.upperObstacles.forEach(function (upperObstacle) {
+	    if (_.contains(upperLeftValues, upperObstacle.y)) {
+	      upperObstacle.movingLeft().draw();
+	    } else {
+	      upperObstacle.movingRight().draw();
+	    }
+	  });
+	};
+
+	Game.prototype.initiateElements = function () {
+	  $(".level-counter").html(this.level);
+	  this.player.draw();
+	  this.moveObstacles();
 	  this.checkForCollision(this.player);
 	  this.checkLevel();
 	  $(".lives-counter").html(localStorage.gamelives);
 	};
 
 	Game.prototype.restartLevel = function () {
-	  //game over message
 	  this.player.score = 0;
 	  localStorage.playerscore = 0;
 	  this.player.x = 225;
@@ -10264,6 +10303,9 @@
 	  this.level = 1;
 	  this.activateGame();
 	  this.obstacles.forEach(function (obstacle) {
+	    obstacle.speed = 0.75;
+	  });
+	  this.upperObstacles.forEach(function (obstacle) {
 	    obstacle.speed = 0.75;
 	  });
 	};
@@ -10291,14 +10333,17 @@
 	Game.prototype.checkLevel = function () {
 	  if (this.player.y === 10) {
 	    this.state = "changeLevel";
+	    yay.play();
 	  }
 	};
 
 	Game.prototype.advanceLevel = function () {
 	  var self = this;
-	  fanfare.play();
 	  this.level = this.player.score / 400 + 1;
 	  this.obstacles.forEach(function (obstacle) {
+	    obstacle.speed = self.level * 0.75;
+	  });
+	  this.upperObstacles.forEach(function (obstacle) {
 	    obstacle.speed = self.level * 0.75;
 	  });
 	  $('.level-counter').html(this.level);
@@ -10311,6 +10356,15 @@
 	    allObstacles.push(newObstacle);
 	  });
 	  return allObstacles;
+	}
+
+	function makeUpperObstacle(canvas, context) {
+	  _(15).times(function () {
+	    var newObstacle = new Upperobstacle({ y: _.sample(upperYValues), x: _.sample(xValues), width: 30,
+	      height: 20, canvas: canvas, context: context });
+	    allUpperObstacles.push(newObstacle);
+	  });
+	  return allUpperObstacles;
 	}
 
 	module.exports = Game;
@@ -11988,6 +12042,61 @@
 	};
 
 	module.exports = Obstacle;
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var _ = __webpack_require__(3);
+	var xValues = _.range(0, -500, -30);
+	var xValuesLeft = _.range(450, 1000, 30);
+	var treadmill = new Image();
+	treadmill.src = 'assets/treadmill.png';
+	var rack = new Image();
+	rack.src = 'assets/squat-rack.png';
+	var elliptical = new Image();
+	elliptical.src = 'assets/elliptical.png';
+	var ball = new Image();
+	ball.src = 'assets/exercise-ball.png';
+	var weights = new Image();
+	weights.src = 'assets/weights.png';
+	var upperImages = [treadmill, rack, elliptical, ball, weights];
+
+	function Upperobstacle(options) {
+	  this.options = options || {};
+	  this.image = upperImages[Math.floor(Math.random() * upperImages.length)];
+	  this.canvas = this.options.canvas;
+	  this.context = this.options.context;
+	  this.x = this.options.x;
+	  this.y = this.options.y;
+	  this.width = this.options.width;
+	  this.height = this.options.height;
+	  this.speed = 1;
+	}
+
+	Upperobstacle.prototype.movingRight = function () {
+	  if (this.x < this.canvas.width) {
+	    this.x = this.x + this.speed;
+	  } else {
+	    this.x = _.sample(xValues);
+	  }
+	  return this;
+	};
+
+	Upperobstacle.prototype.movingLeft = function () {
+	  if (this.x > 0) {
+	    this.x = this.x - this.speed;
+	  } else {
+	    this.x = _.sample(xValuesLeft);
+	  }
+	  return this;
+	};
+
+	Upperobstacle.prototype.draw = function () {
+	  this.context.drawImage(this.image, this.x, this.y, this.width, this.height);
+	};
+
+	module.exports = Upperobstacle;
 
 /***/ }
 /******/ ]);
